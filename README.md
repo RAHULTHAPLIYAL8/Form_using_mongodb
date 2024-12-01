@@ -41,6 +41,7 @@ Page
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Styling**: Basic CSS
+-**For Security**:bcrypt
 
 ---
 
