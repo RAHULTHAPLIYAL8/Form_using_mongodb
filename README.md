@@ -47,7 +47,7 @@ Page
 
 ### Steps to Run Locally:
 1. Clone the repository:
-   -git clone https://github.com/RAHULTHAPLIYAL8/Form_using_mongodb
-  - For running the Backend-node server.js
-   -For running the Frontend-npm run dev
+- git clone https://github.com/RAHULTHAPLIYAL8/Form_using_mongodb
+- For running the Backend-node server.js
+- For running the Frontend-npm run dev
 
