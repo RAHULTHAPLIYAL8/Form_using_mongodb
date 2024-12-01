@@ -1,45 +1,52 @@
-# Car Rental Website 🚗
-A web application where users can seamlessly book cars of their choice, while admins have the capability to manage the inventory by adding new cars to the platform. 
+# Basic Form using mongodb
+fully functional authentication page that includes a Signup Page and a Login
+Page 
 
 
-## User UI
-![Car login](Images/Image1.png)
-![Car Ui](Images/Image2.png)
+## Sign up 
 
-### User Features: 🌟
-- Browse available cars.
-- View car details.
-- Book a car for specific dates.
+### enpoint
+/signup
 
-### slug
-/
 
-## Admin UI
-![Admin 1](Images/Image3.png)
-![Admin 2](Images/Image4.png)
-![Admin 3](Images/Image5.png)
+![Signup_green](Images/Image1.png)
+![Signup_Red](Images/Image2.png)
+![Signup_Red](Images/Image3.png)
 
-### slug
+### Signup Features: 🌟
+- Check all the fields are covered or not.
+- give alert if credentials are not give correct.
+- give aleret if user sucessfully Registered.
+
+
+
+## Signin
+
+### endpoint
 /admin
+
+![Signin_green](Images/Image4.png)
+![Signin_red](Images/Image5.png)
+
+
 ### Admin Features:
-- Add new cars.
-- Update or delete existing cars.
-- Manage car availability.
+- give alert when user login correct.
+- give alert if user not login correct.
 
 ---
 
 ## Tech Stack 🛠️
 
-- **Frontend**: React.js 
+- **Frontend**: React.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **Styling**: CSS / Tailwind CSS
-- **Authentication**: JWT (JSON Web Tokens)
+- **Styling**: Basic CSS
+
 ---
 
 ### Steps to Run Locally:
 1. Clone the repository:
-   git clone https://github.com/yourusername/car-booking-website.git
+   git clone https://github.com/RAHULTHAPLIYAL8/Form_using_mongodb
    For running the Backend-node server.js
    For running the Frontend-npm run dev
 
