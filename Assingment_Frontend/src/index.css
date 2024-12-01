@@ -1,0 +1,56 @@
+*
+{
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+
+ 
+}
+
+.Box-1{
+  width: 60%;
+  height:100%;
+  display:flex;
+  align-items: center;
+}
+
+.Box-2
+{
+width:40%;
+padding-top:25vh;
+}
+
+
+input
+{
+  height:2.5vw;
+  font-size:1rem;
+}
+.input
+{
+  width: "48%";
+}
+
+
+@media (max-width: 768px) {
+  .Box-1 {
+    display: none;
+  }
+
+  .Box-2 {
+    width: 100%;
+    padding-top: 5vh;
+  }
+
+  input
+{
+  height:7vw;
+  font-size:18px;
+  flex-wrap: wrap;
+}
+.input
+{
+  width: "100%";
+}
+}

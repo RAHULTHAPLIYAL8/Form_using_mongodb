@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+    .Box-1 {
+      display: none;
+    }
+  
+    .Box-2 {
+      width: 100%;
+      padding-top: 5vh;
+    }
+  }
