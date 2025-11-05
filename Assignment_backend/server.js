@@ -31,7 +31,7 @@ mongoose.connect(`${process.env.MONGO_URL}`).then(()=>
 app.use("/",router);
 app.use("/book",bookrouter);
 
-const port=process.env.PORT | 8000
+const port=process.env.PORT || 8000
 
 app.listen(port,(err)=>
 {
