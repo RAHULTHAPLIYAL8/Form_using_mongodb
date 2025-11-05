@@ -42,7 +42,7 @@ const Signup = () => {
       return;
     }
 
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}signup`, {
+    const response = await fetch(`https://form-using-mongodb.vercel.app/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

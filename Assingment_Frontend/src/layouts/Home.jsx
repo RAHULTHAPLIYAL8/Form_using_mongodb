@@ -19,7 +19,7 @@ const Home = () => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${import.meta.env.VITE_BASE_URL}book/getbooks`, { credentials: 'include' });
+      const res = await fetch(`https://form-using-mongodb.vercel.app/book/getbooks`, { credentials: 'include' });
       const data = await res.json();
 
   
@@ -49,7 +49,7 @@ const Home = () => {
 
   const deleteFunc = async (id) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_BASE_URL}book/delete/${id}`, {
+      const res = await fetch(`https://form-using-mongodb.vercel.app/book/delete/${id}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -83,8 +83,8 @@ const Home = () => {
 
     try {
       const url = editMode
-        ? `${import.meta.env.VITE_BASE_URL}book/update/${selectedBookId}`
-        : `${import.meta.env.VITE_BASE_URL}book/create`;
+        ? `https://form-using-mongodb.vercel.app/book/update/${selectedBookId}`
+        : `https://form-using-mongodb.vercel.app/book/create`;
 
       const method = editMode ? 'PATCH' : 'POST';
 
