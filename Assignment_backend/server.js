@@ -10,8 +10,12 @@ const app =Express();
 const router=require("./routers/user_router")
 const bookrouter=require("./routers/book_router")
 /////request for differenet server//////////////////////////
-app.use(cors({origin: "*", 
-credentials: true}));
+app.use(cors({
+  origin: "https://form-using-mongodb-lt43.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true // allow cookies
+}));
+
 app.use('/uploads', Express.static('uploads'));
 app.use(cookieParser());
 //Middleware for JSON Parsing///////////////////////////
