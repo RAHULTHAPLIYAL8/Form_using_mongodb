@@ -12,7 +12,7 @@ const bookrouter=require("./routers/book_router")
 /////request for differenet server//////////////////////////
 app.use(cors({
   origin: "https://form-using-mongodb-lt43.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS"],
   credentials: true // allow cookies
 }));
 
