@@ -2,8 +2,10 @@ const Express=require("express");
 const mongoose=require("mongoose")
 const bcrypt = require('bcrypt');
 const cors=require("cors");
+const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+dotenv.config();
 const app =Express();
 const router=require("./routers/user_router")
 const bookrouter=require("./routers/book_router")
@@ -15,7 +17,7 @@ app.use(cookieParser());
 app.use(Express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 ////////////////////////////////////////////////////////
-mongoose.connect("mongodb://localhost:27017/Assign").then(()=>
+mongoose.connect(`${process.env.MONGO_URL}`).then(()=>
 {
     console.log("Mongodb Database connecte!!!")
 }).catch((err)=>
