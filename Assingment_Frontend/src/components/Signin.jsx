@@ -32,7 +32,7 @@ const Signin = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/signin', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

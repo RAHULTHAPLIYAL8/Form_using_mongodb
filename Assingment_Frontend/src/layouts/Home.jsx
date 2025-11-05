@@ -19,7 +19,7 @@ const Home = () => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:8000/book/getbooks', { credentials: 'include' });
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}book/getbooks`, { credentials: 'include' });
       const data = await res.json();
 
   
@@ -49,7 +49,7 @@ const Home = () => {
 
   const deleteFunc = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8000/book/delete/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}book/delete/${id}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -83,8 +83,8 @@ const Home = () => {
 
     try {
       const url = editMode
-        ? `http://localhost:8000/book/update/${selectedBookId}`
-        : 'http://localhost:8000/book/create';
+        ? `${import.meta.env.VITE_BASE_URL}book/update/${selectedBookId}`
+        : `${import.meta.env.VITE_BASE_URL}book/create`;
 
       const method = editMode ? 'PATCH' : 'POST';
 
