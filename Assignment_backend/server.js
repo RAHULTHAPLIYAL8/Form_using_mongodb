@@ -11,7 +11,7 @@ const router=require("./routers/user_router")
 const bookrouter=require("./routers/book_router")
 /////request for differenet server//////////////////////////
 app.use(cors({origin:["http://localhost:5173",
-    "https://form-using-mongodb.vercel.app"
+    "https://form-using-mongodb-lt43.vercel.app/"
 ]
 ,credentials: true}));
 app.use('/uploads', Express.static('uploads'));
