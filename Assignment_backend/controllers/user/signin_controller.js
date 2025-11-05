@@ -1,34 +1,46 @@
-const model=require("../../models/Signup_Schema");
-const bcrypt=require("bcrypt")
+const model = require("../../models/Signup_Schema");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const signin=async(req,res)=>
-{
-    try {
-        const { email, password } = req.body;
-    
-        const user = await model.findOne({ email: email });
-        if (user) {
-          console.log("User found Successfully!!!!!!!!!!!!!!!");
-    
-          bcrypt.compare(password, user.password)
-            .then((isMatch) => {
-              if (isMatch) {
-                console.log("Password match successfully");
-                res.json({ status: "ok", message: "Successfully logged in" });
-              } else {
-                res.json({ status: "error", message: "Password doesn't match :(" });
-              }
-            })
-            .catch((err) => {
-              console.error("Error in password comparison:", err);
-            });
-        } else {
-          res.json({ status: "error", message: "User not found :(" });
-        }
-      } catch (error) {
-        console.error("Error in signin process:", error);
-        console.log("Intenal Server Error");
-      }
-}
+const signin = async (req, res) => {
+  try {
 
-module.exports=signin;
+    console.log("rahul Thapliyal")
+    const { email, password } = req.body;
+
+    const user = await model.findOne({ email });
+    if (!user) {
+      return res.json({ status: "error", message: "User not found :(" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.json({ status: "error", message: "Password doesn't match :(" });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      "MY_SECRET_KEY",
+      { expiresIn: "1d" } 
+    );
+
+    console.log(token);
+
+    res.cookie("token", token, {
+      httpOnly: true,      
+      secure: false,        
+      maxAge: 24 * 60 * 60 * 1000 
+    });
+
+    return res.json({
+      status: "ok",
+      message: "Successfully logged in ✅"
+    });
+
+  } catch (error) {
+    console.error("Error in signin process:", error);
+    return res.status(500).json({ status: "error", message: "Internal Server Error" });
+  }
+};
+
+module.exports = signin;

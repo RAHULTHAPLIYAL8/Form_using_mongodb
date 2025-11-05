@@ -9,16 +9,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    dob: {
-        type:Date,
-        required: true,
-    },
-    number: { 
-      
-        type: Number,
-        required:true,
-        
-    },
     password:{
         type: String,
         required:true,

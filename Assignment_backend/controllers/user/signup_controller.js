@@ -4,7 +4,7 @@ const signup=async (req,res)=>
 {
     try{
         console.log(req.body)
-        const { name, email, dob, number, password} = req.body;
+        const { name, email,password} = req.body;
         const unique = await model.findOne({ email });
         if (unique) {
           res.json({ status:"error", message: "Email already exists" });
@@ -12,7 +12,7 @@ const signup=async (req,res)=>
         }
         const salt = await bcrypt.genSalt(10);  
         const hashpassword = await bcrypt.hash(password, salt); 
-        const newUser = new model({ name,email,dob,number:Number(number),password:hashpassword });
+        const newUser = new model({ name,email,password:hashpassword });
         const savedUser = await newUser.save();
         if(savedUser)
         {

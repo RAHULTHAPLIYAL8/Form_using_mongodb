@@ -121,36 +121,6 @@ const Signup = () => {
             />
           </div>
 
-          <div className='input' style={{ display: "flex", flexDirection: "column", width: "48%" }}>
-            <label htmlFor="dob" style={{ marginBottom: "0.5vh" }}>Date of Birth:</label>
-            <input
-              type="date"
-              id="dob"
-              name="dob"
-              value={formData.dob}
-              onChange={handleChange}
-              placeholder="Date"
-              style={{
-                outline: "none", border: "1px solid #ccc", padding: "0.5vw", borderRadius: "5px", color: "grey"
-              }}
-            />
-          </div>
-
-          <div className="input" style={{ display: "flex", flexDirection: "column", width: "48%" }}>
-            <label htmlFor="phone" style={{ marginBottom: "0.5vh" }}>Phone Number:</label>
-            <input
-              type="tel"
-              id="phone"
-              name="number"
-              value={formData.number}
-              onChange={handleChange}
-              placeholder="Enter your phone number"
-              style={{
-                outline: "none", border: "1px solid #ccc", padding: "0.5vw", borderRadius: "5px",
-              }}
-            />
-          </div>
-
         
           <div className="input" style={{ display: "flex", flexDirection: "column", width: "48%" }}>
             <label htmlFor="password" style={{ marginBottom: "0.5vh" }}>Password:</label>

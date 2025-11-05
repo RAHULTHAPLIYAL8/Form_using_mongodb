@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @media (max-width: 768px) {
     .Box-1 {
       display: none;

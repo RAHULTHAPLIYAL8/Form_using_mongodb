@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import img1 from "../assets/Img1.jpg";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -19,6 +21,9 @@ const Signin = () => {
   };
 
   const handleSubmit = async (e) => {
+
+
+
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
@@ -33,13 +38,16 @@ const Signin = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include'
       });
 
       const result = await response.json();
 
       if (result.status === 'ok') {
         setError(result.message);
+
         setBool(true);
+        navigate('/home');
         console.log(result.message);
       } else {
         setBool(false);
@@ -137,7 +145,7 @@ const Signin = () => {
         {bool === false && <p style={{ color: 'red', fontSize: '1rem', marginTop: '2vh', border: "2px solid red", padding: "1vw" }}>{error}</p>}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .Box-1 {
             display: none; /* Hide Box-1 on mobile and tablet */
