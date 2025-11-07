@@ -40,7 +40,7 @@ const Signup = () => {
       return;
     }
 
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/signin`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
