@@ -2,8 +2,9 @@ const Books=require('../../models/Book');
 
 exports.getBooks=async(req,res)=>
 {
+    const userid=req.userId;
     const books=await Books.find({isAvailable:true}).populate('owner','name email');
-    res.json(books);
+    res.json({"data":books,"userId":userid});
 }
 
 exports.getBook=async(req,res)=>

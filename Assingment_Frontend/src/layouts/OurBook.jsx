@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
-import { Link } from "react-router";
 
-const Home = () => {
+const OurBook = () => {
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -12,39 +11,20 @@ const Home = () => {
 
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [selectedBookId, setSelectedBookId] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [userId, setUserId] = useState('');
+  const [editMode, setEditMode] = useState(false); 
+  const [selectedBookId, setSelectedBookId] = useState(null); 
+  const [showModal, setShowModal] = useState(false); 
 
-  const handleRequest = async (book) => {
-    const bookid = book._id;
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/request/getrequest`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ bookId: bookid }),
-        credentials: 'include',
-      });
-
-      const res = await response.json();
-      fetchBooks();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.VITE_BACKEND_API}/book/getbooks`, { credentials: 'include' });
+      const res = await fetch(`http://localhost:8000/book/getbook`, { credentials: 'include' });
       const data = await res.json();
 
-      setUserId(data.userId);
-      setBooks(data.data || []);
+  
+
+      setBooks(data || []);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching books:', err);
@@ -56,6 +36,7 @@ const Home = () => {
     fetchBooks();
   }, []);
 
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'avatar') {
@@ -65,19 +46,22 @@ const Home = () => {
     }
   };
 
+
   const deleteFunc = async (id) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/book/delete/${id}`, {
+      const res = await fetch(`http://localhost:8000/book/delete/${id}`, {
         method: 'GET',
         credentials: 'include',
       });
-
-      const result = await res.json();
+      
+       
 
       if (res.ok) {
-        if (result.message === 'Forbidden') {
-          alert('Only Owner of this book can delete this');
-        }
+
+         if(res.message=='Forbidden')
+    {
+    alert('Only Owner of this book can delete this')
+    }
 
         alert('Deleted Successfully');
         fetchBooks();
@@ -87,6 +71,7 @@ const Home = () => {
     }
   };
 
+  // Create or Update
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -98,8 +83,8 @@ const Home = () => {
 
     try {
       const url = editMode
-        ? `${import.meta.env.VITE_BACKEND_API}/book/update/${selectedBookId}`
-        : `${import.meta.env.VITE_BACKEND_API}/book/create`;
+        ? `http://localhost:8000/book/update/${selectedBookId}`
+        : `http://localhost:8000/book/create`;
 
       const method = editMode ? 'PATCH' : 'POST';
 
@@ -109,10 +94,15 @@ const Home = () => {
         credentials: 'include',
       });
 
+    
       const result = await response.json();
 
+    
+
       if (response.ok) {
-        if (result.message === 'Forbidden') alert('Only Owner of this book can change this');
+
+        if(result.message=='Forbidden')
+        alert('Only Owner of this book can change this')
 
         alert(editMode ? 'Book updated successfully!' : 'Book added successfully!');
         setFormData({ title: '', author: '', condition: 'New', image: null });
@@ -129,6 +119,7 @@ const Home = () => {
     }
   };
 
+  // Open edit modal and prefill
   const openEditModal = (book) => {
     setFormData({
       title: book.title,
@@ -141,6 +132,7 @@ const Home = () => {
     setShowModal(true);
   };
 
+  // Open create modal
   const openCreateModal = () => {
     setFormData({ title: '', author: '', condition: 'New', image: null });
     setEditMode(false);
@@ -151,59 +143,27 @@ const Home = () => {
     <div>
       <Nav />
 
-      <button
-        onClick={openCreateModal}
-        className="text-white bg-red-500 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 mt-5"
-      >
-        Add Books
-      </button>
 
       {loading ? (
         <p className="text-center mt-5 text-gray-600">Loading books...</p>
       ) : (
         <div className="ms-4 grid grid-cols-3 gap-4 mt-5">
           {books.length > 0 ? (
-            books.map((book) =>
-              book.isAvailable ? (
-                <div key={book._id} className="border rounded-lg p-4 shadow-md bg-white relative">
-                  <h1>{book.owner.name}</h1>
-                  <img
-                    src={`${import.meta.env.VITE_BACKEND_API}/${book.imageUrl}`}
-                    alt={book.title}
-                    className="w-full h-48 object-cover rounded-md"
-                  />
-                  <h2 className="text-lg font-bold mt-2">{book.title}</h2>
-                  <p className="text-gray-600">Author: {book.author}</p>
-                  <p className="text-sm text-gray-500">Condition: {book.condition}</p>
+            books.map((book) => (
+              <div key={book._id} className="border rounded-lg p-4 shadow-md bg-white relative">
+                <img
+                  src={`http://localhost:8000/${book.imageUrl}`}
+                  alt={book.title}
+                  className="w-full h-48 object-cover rounded-md"
+                />
+                <h2 className="text-lg font-bold mt-2">{book.title}</h2>
+                <p className="text-gray-600">Author: {book.author}</p>
+                <p className="text-sm text-gray-500">Condition: {book.condition}</p>
 
-                  {userId === book.owner._id ? (
-                    <div className="flex justify-end gap-2 mt-2">
-                      <button
-                        onClick={() => openEditModal(book)}
-                        className="bg-green-500 text-white p-1 px-3 rounded"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => deleteFunc(book._id)}
-                        className="bg-red-500 text-white p-1 px-3 rounded"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => handleRequest(book)}
-                        className="bg-pink-500 text-white p-1 px-3 rounded"
-                      >
-                        Send Request
-                      </button>
-                    </div>
-                  )}
+                <div className="flex justify-end gap-2 mt-2">
                 </div>
-              ) : null
-            )
+              </div>
+            ))
           ) : (
             <p className="text-center col-span-3 text-gray-500">No books found</p>
           )}
@@ -279,4 +239,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default OurBook ;

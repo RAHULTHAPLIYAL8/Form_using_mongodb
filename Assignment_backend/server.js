@@ -9,9 +9,10 @@ dotenv.config();
 const app =Express();
 const router=require("./routers/user_router")
 const bookrouter=require("./routers/book_router")
+const requestrouter=require("./routers/request_router")
 /////request for differenet server//////////////////////////
 app.use(cors({
-  origin: "https://form-using-mongodb-lt43.vercel.app",
+  origin: ["https://form-using-mongodb-lt43.vercel.app","http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS"],
   credentials: true // allow cookies
 }));
@@ -32,6 +33,8 @@ mongoose.connect(`${process.env.MONGO_URL}`).then(()=>
 
 app.use("/",router);
 app.use("/book",bookrouter);
+app.use("/request",requestrouter);
+
 
 const port=process.env.PORT || 8000
 

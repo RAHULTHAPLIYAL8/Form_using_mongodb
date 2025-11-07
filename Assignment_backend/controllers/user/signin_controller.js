@@ -35,7 +35,7 @@ const signin = async (req, res) => {
 
     return res.json({
       status: "ok",
-      message: "Successfully logged in ✅"
+      message: "Successfully logged in "
     });
 
   } catch (error) {

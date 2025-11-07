@@ -7,8 +7,6 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    dob: '',
-    number: '',
     password: '',
     confirmPassword: ''
   });
@@ -30,7 +28,7 @@ const Signup = () => {
     e.preventDefault();
 
 
-    if(formData.dob.length===0 || formData.email.length===0 || formData.name.length===0 || formData.number.length===0 || formData.password.length===0|| formData.confirmPassword.length===0)
+    if(formData.email.length===0 || formData.name.length===0 ||  formData.password.length===0|| formData.confirmPassword.length===0)
     {
       setBool(false);
       setError('Fill all the Fields');
@@ -42,7 +40,7 @@ const Signup = () => {
       return;
     }
 
-    const response = await fetch(`https://form-using-mongodb.vercel.app/signup`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
