@@ -40,7 +40,7 @@ const Home = () => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.VITE_BACKEND_API}/book/getbooks`, { credentials: 'include' });
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/book/getbooks`, { credentials: 'include' });
       const data = await res.json();
 
       setUserId(data.userId);
